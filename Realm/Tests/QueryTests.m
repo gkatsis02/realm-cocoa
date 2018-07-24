@@ -1290,12 +1290,14 @@
     [realm commitWriteTransaction];
 }
 
+#if 0
 - (void)testLinkQueryNewObjectCausesEmptyResults
 {
     [self makeDogWithName:@"Harvie" owner:@"Tim"];
     DogObject *newDogObject = [[DogObject alloc] init];
     RLMAssertCount(OwnerObject, 0U, @"dog = %@", newDogObject);
 }
+#endif
 
 - (void)testLinkQueryDifferentRealmsThrows
 {
