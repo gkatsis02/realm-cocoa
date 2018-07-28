@@ -203,7 +203,11 @@ extension Realm {
                 self.customSchema = newValue.map { RLMSchema(objectClasses: $0) }
             }
             get {
-                return self.customSchema.map { $0.objectSchema.compactMap { $0.objectClass as? Object.Type } }
+                 #if swift(>=4.1)
+                    return self.customSchema.map { $0.objectSchema.compactMap { $0.objectClass as? Object.Type } }
+                 #else
+                    return self.customSchema.map { $0.objectSchema.flatMap { $0.objectClass as? Object.Type } }
+                 #endif
             }
         }
 
